@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class Shopkeeper : MonoBehaviour, IInteractuable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Store _store;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        _store.gameObject.SetActive(false);
     }
 
     public void Interact()
     {
-        Debug.Log("Hola");
+        _store.gameObject.SetActive(!_store.gameObject.activeSelf);
     }
 }
