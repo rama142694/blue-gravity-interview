@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
 
     public void SetItem(ItemSO item, Store store)
     {
+        _itemInfo = item;
         _itemImage.sprite = item.itemSprite;
         _itemStore = store;
     }

@@ -10,6 +10,7 @@ public class Store : MonoBehaviour
     [SerializeField] private Item _itemPrefab;
 
     [Header("Selected Item")]
+    [SerializeField] private SelectedItemInfo _selectedItemInfo;
     [SerializeField] private ItemSO _selectedItem;
 
     private void Start()
@@ -46,5 +47,6 @@ public class Store : MonoBehaviour
     public void SetSelectedItem(ItemSO item)
     {
         _selectedItem = item;
+        _selectedItemInfo.ChangeSelectedItemInfo(item);
     }
 }
