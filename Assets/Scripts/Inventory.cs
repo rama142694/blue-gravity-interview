@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Store : StorageItemsSystem
+public class Inventory : StorageItemsSystem
 {
     protected override void Start()
     {
@@ -12,12 +12,12 @@ public class Store : StorageItemsSystem
     }
     private void SubscribeEvents()
     {
-        EventManager.current.OnItemSelled += AddItem;
-        EventManager.current.OnItemBought += RemoveItem;
+        EventManager.current.OnItemSelled += RemoveItem;
+        EventManager.current.OnItemBought += AddItem;
     }
 
-    public void BuyItem()
+    public void SellItem()
     {
-        EventManager.current.ItemBought(_selectedItem);
+        EventManager.current.ItemSelled(_selectedItem);
     }
 }

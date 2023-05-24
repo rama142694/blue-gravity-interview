@@ -6,6 +6,7 @@ using System.Linq;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
+    [SerializeField] private Inventory _inventory;
 
     [Header("Interaction")]
     [SerializeField] private float _interactionRadius;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        OpenOrCloseInventory(false);
     }
 
     void Update()
@@ -42,8 +44,14 @@ public class Player : MonoBehaviour
             if (interaction)
             {
                 interaction.GetComponent<IInteractuable>().Interact();
+                OpenOrCloseInventory(!_inventory.gameObject.activeSelf);
             }
         }
+    }
+
+    private void OpenOrCloseInventory(bool closeOrOpen)
+    {
+        _inventory.gameObject.SetActive(closeOrOpen);
     }
 
     private void OnDrawGizmos()
