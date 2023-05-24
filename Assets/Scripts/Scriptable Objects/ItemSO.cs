@@ -8,4 +8,5 @@ public class ItemSO : ScriptableObject
     public string itemName;
     public float itemPrice;
     public Sprite itemSprite;
+    public ItemType itemType;
 }

@@ -23,4 +23,16 @@ public class EventManager : MonoBehaviour
     {
         OnItemSelled(item);
     }
+
+    public Action<ItemSO> OnEquipItem;
+    public void EquipItem(ItemSO item)
+    {
+        OnEquipItem(item);
+    }
+
+    public Action<ItemSO> OnUnequipItem;
+    public void UnequipItem(ItemSO item)
+    {
+        OnUnequipItem(item);
+    }
 }

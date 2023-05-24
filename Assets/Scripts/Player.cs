@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     {
         Move();
         Interact();
+        Inventory();
     }
 
     private void Move()
@@ -33,6 +34,15 @@ public class Player : MonoBehaviour
 
         Vector2 movement = new Vector2(horizontalMovement, verticalMovement);
         rb.velocity = movement.normalized * _speed;
+    }
+
+    private void Inventory()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            OpenOrCloseInventory(!_inventory.gameObject.activeSelf);
+            _inventory.SetInventoryType(false);
+        }
     }
 
     private void Interact()
@@ -45,6 +55,7 @@ public class Player : MonoBehaviour
             {
                 interaction.GetComponent<IInteractuable>().Interact();
                 OpenOrCloseInventory(!_inventory.gameObject.activeSelf);
+                _inventory.SetInventoryType(true);
             }
         }
     }

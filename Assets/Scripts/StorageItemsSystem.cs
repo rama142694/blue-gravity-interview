@@ -11,7 +11,7 @@ public class StorageItemsSystem : MonoBehaviour
 
     [Header("Selected Item")]
     [SerializeField] protected SelectedItemInfo _selectedItemInfo;
-    [SerializeField] protected ItemSO _selectedItem;
+    protected ItemSO _selectedItem;
 
     protected virtual void Start()
     {
@@ -49,6 +49,10 @@ public class StorageItemsSystem : MonoBehaviour
     public void SetSelectedItem(ItemSO item)
     {
         _selectedItem = item;
-        _selectedItemInfo.ChangeSelectedItemInfo(item);
+
+        if (_selectedItemInfo)
+        {
+            _selectedItemInfo.ChangeSelectedItemInfo(item);
+        }
     }
 }

@@ -20,4 +20,10 @@ public class Item : MonoBehaviour
     {
         _itemStorage.SetSelectedItem(_itemInfo);
     }
+
+    public void RemoveItem()
+    {
+        _itemInfo = null;
+        _itemImage.sprite = null;
+    }
 }
