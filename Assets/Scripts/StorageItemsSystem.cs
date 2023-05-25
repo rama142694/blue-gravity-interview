@@ -16,6 +16,9 @@ public class StorageItemsSystem : MonoBehaviour
     protected virtual void Start()
     {
         CreateStore();
+
+        if(_selectedItemInfo)
+            _selectedItemInfo.gameObject.SetActive(false);
     }
 
     protected void CreateStore()
@@ -29,6 +32,8 @@ public class StorageItemsSystem : MonoBehaviour
     public virtual void AddItem(ItemSO item)
     {
         CreateNewItemUI(item);
+        _selectedItem = null;
+        _selectedItemInfo.gameObject.SetActive(false);
     }
 
     public virtual void RemoveItem(ItemSO item)
@@ -36,6 +41,8 @@ public class StorageItemsSystem : MonoBehaviour
         Item itemUI = _storageUIItems[item];
         _storageUIItems.Remove(item);
         Destroy(itemUI.gameObject);
+        _selectedItem = null;
+        _selectedItemInfo.gameObject.SetActive(false);
     }
 
     protected void CreateNewItemUI(ItemSO item)
@@ -53,6 +60,7 @@ public class StorageItemsSystem : MonoBehaviour
         if (_selectedItemInfo)
         {
             _selectedItemInfo.ChangeSelectedItemInfo(item);
+            _selectedItemInfo.gameObject.SetActive(true);
         }
     }
 }

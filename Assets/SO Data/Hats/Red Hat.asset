@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc0cae7e8cf6b734daadefec0c843b72, type: 3}
-  m_Name: Crown
+  m_Name: Red Hat
   m_EditorClassIdentifier: 
-  itemName: Crown
-  itemPrice: 200
-  itemSprite: {fileID: 21300000, guid: f30c689e1cd8caa45a28c4947f382374, type: 3}
-  itemType: 1
+  itemName: Red Hat
+  itemPrice: 100
+  itemIconSprite: {fileID: 21300000, guid: 3bbb4d9937725da4cb8ff09b76e65e1e, type: 3}
+  itemEquippedSprite: {fileID: 21300000, guid: 3bbb4d9937725da4cb8ff09b76e65e1e, type: 3}
+  itemType: 0

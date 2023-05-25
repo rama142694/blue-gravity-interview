@@ -16,8 +16,18 @@ public class Inventory : StorageItemsSystem
     {
         EventManager.current.OnItemSelled += RemoveItem;
         EventManager.current.OnItemBought += AddItem;
+        EventManager.current.OnAddItemToInventory += AddItem;
         EventManager.current.OnEquipItem += RemoveItem;
         EventManager.current.OnUnequipItem += AddItem;
+    }
+
+    private void UnsubscribeEvents()
+    {
+        EventManager.current.OnItemSelled -= RemoveItem;
+        EventManager.current.OnItemBought -= AddItem;
+        EventManager.current.OnAddItemToInventory -= AddItem;
+        EventManager.current.OnEquipItem -= RemoveItem;
+        EventManager.current.OnUnequipItem -= AddItem;
     }
 
     public void SellItem()
@@ -34,5 +44,10 @@ public class Inventory : StorageItemsSystem
     {
         _selectedItemInfo.SetSelectedItemInfoUI(isShop);
         _equippedItems.gameObject.SetActive(!isShop);
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeEvents();
     }
 }

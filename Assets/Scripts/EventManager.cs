@@ -35,4 +35,10 @@ public class EventManager : MonoBehaviour
     {
         OnUnequipItem(item);
     }
+
+    public Action<ItemSO> OnAddItemToInventory;
+    public void AddItemToInventory(ItemSO item)
+    {
+        OnAddItemToInventory(item);
+    }
 }

@@ -22,15 +22,23 @@ public class EquippedItemsSystem : StorageItemsSystem
         EventManager.current.OnUnequipItem += RemoveItem;
     }
 
+    private void UnsubscribeEvents()
+    {
+        EventManager.current.OnEquipItem -= AddItem;
+        EventManager.current.OnUnequipItem -= RemoveItem;
+    }
+
     public override void AddItem(ItemSO item)
     {
         switch (item.itemType)
         {
-            case ItemType.Hat: _hatUIItem.SetItem(item, this); break;
-            case ItemType.Shirt: _shirtUIItem.SetItem(item, this); break;
-            case ItemType.Trousers: _trousersUIItem.SetItem(item, this); break;
-            case ItemType.Shoes: _shoesUIItem.SetItem(item, this); break;
+            case ItemType.Hat: EquipItem(_hatUIItem, item); break;
+            case ItemType.Shirt: EquipItem(_shirtUIItem, item); break;
+            case ItemType.Trousers: EquipItem(_trousersUIItem, item); break;
+            case ItemType.Shoes: EquipItem(_shoesUIItem, item); break;
         }
+
+        _selectedItem = null;
     }
 
     public override void RemoveItem(ItemSO item)
@@ -42,10 +50,30 @@ public class EquippedItemsSystem : StorageItemsSystem
             case ItemType.Trousers: _trousersUIItem.RemoveItem(); break;
             case ItemType.Shoes: _shoesUIItem.RemoveItem(); break;
         }
+
+        _selectedItem = null;
     }
 
-    public void UnequiItem()
+    private void EquipItem(Item itemUI, ItemSO itemToEquip)
     {
-        EventManager.current.UnequipItem(_selectedItem);
+        if (itemUI.GetCurrentItem())
+        {
+            EventManager.current.AddItemToInventory(itemUI.GetCurrentItem());
+        }
+
+        itemUI.SetItem(itemToEquip, this);
+    }
+
+    public void UnequipItem()
+    {
+        if (_selectedItem)
+        {
+            EventManager.current.UnequipItem(_selectedItem);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeEvents();
     }
 }

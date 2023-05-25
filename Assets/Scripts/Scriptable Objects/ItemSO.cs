@@ -7,6 +7,7 @@ public class ItemSO : ScriptableObject
 {
     public string itemName;
     public float itemPrice;
-    public Sprite itemSprite;
+    public Sprite itemIconSprite;
+    public Sprite itemEquippedSprite;
     public ItemType itemType;
 }

@@ -9,21 +9,31 @@ public class Item : MonoBehaviour
     private ItemSO _itemInfo;
     [SerializeField] private Image _itemImage;
 
+    public ItemSO GetCurrentItem()
+    {
+        return _itemInfo;
+    }
+
     public void SetItem(ItemSO item, StorageItemsSystem storage)
     {
         _itemInfo = item;
-        _itemImage.sprite = item.itemSprite;
+        _itemImage.sprite = item.itemIconSprite;
+        _itemImage.gameObject.SetActive(true);
         _itemStorage = storage;
     }
 
     public void SetSelectedItem()
     {
-        _itemStorage.SetSelectedItem(_itemInfo);
+        if (_itemInfo)
+        {
+            _itemStorage.SetSelectedItem(_itemInfo);
+        }
     }
 
     public void RemoveItem()
     {
         _itemInfo = null;
         _itemImage.sprite = null;
+        _itemImage.gameObject.SetActive(false);
     }
 }

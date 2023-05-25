@@ -7,6 +7,7 @@ using TMPro;
 public class SelectedItemInfo : MonoBehaviour
 {
     [SerializeField] private TMP_Text _itemNameText;
+    [SerializeField] private TMP_Text _itemTypeText;
     [SerializeField] private TMP_Text _itemPriceText;
     [SerializeField] private GameObject _itemPriceContainer;
     [SerializeField] private Button _buyButton;
@@ -15,6 +16,7 @@ public class SelectedItemInfo : MonoBehaviour
     public void ChangeSelectedItemInfo(ItemSO item)
     {
         _itemNameText.text = item.itemName;
+        _itemTypeText.text = item.itemType.ToString();
         _itemPriceText.text = item.itemPrice.ToString();
     }
 
