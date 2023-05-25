@@ -5,17 +5,24 @@ using System.Linq;
 
 public class Player : MonoBehaviour
 {
+    [Header("General Variables")]
     [SerializeField] private float _speed;
     [SerializeField] private Inventory _inventory;
+    private bool _canMove;
+    private bool _isInventoryOpen;
+    private bool _isStoreOpen;
 
     [Header("Interaction")]
     [SerializeField] private float _interactionRadius;
     [SerializeField] private LayerMask _interactionLayerMask;
 
+
+    [Header("Components")]
     private Rigidbody2D rb;
 
     void Start()
     {
+        _canMove = true;
         rb = GetComponent<Rigidbody2D>();
         OpenOrCloseInventory(false);
     }
@@ -29,6 +36,8 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
+        if (!_canMove) { rb.velocity = Vector3.zero; return; }
+
         float horizontalMovement = Input.GetAxis("Horizontal");
         float verticalMovement = Input.GetAxis("Vertical");
 
@@ -38,8 +47,12 @@ public class Player : MonoBehaviour
 
     private void Inventory()
     {
+        if (_isStoreOpen) return;
+
         if (Input.GetKeyDown(KeyCode.I))
         {
+            _canMove = !_canMove;
+            _isInventoryOpen = !_isInventoryOpen;
             OpenOrCloseInventory(!_inventory.gameObject.activeSelf);
             _inventory.SetInventoryType(false);
         }
@@ -47,12 +60,16 @@ public class Player : MonoBehaviour
 
     private void Interact()
     {
+        if (_isInventoryOpen) return;
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             var interaction = Physics2D.OverlapCircle(transform.position, _interactionRadius, _interactionLayerMask);
 
             if (interaction)
             {
+                _canMove = !_canMove;
+                _isStoreOpen = !_isStoreOpen;
                 interaction.GetComponent<IInteractuable>().Interact();
                 OpenOrCloseInventory(!_inventory.gameObject.activeSelf);
                 _inventory.SetInventoryType(true);
