@@ -522,10 +522,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1198466112843723545, guid: 855c41dd848a5764bb7f0ae553807879, type: 3}
-      propertyPath: m_DirtyAABB
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1897793386591055877, guid: 855c41dd848a5764bb7f0ae553807879, type: 3}
       propertyPath: m_Name
       value: Player
@@ -752,6 +748,10 @@ PrefabInstance:
     - target: {fileID: 5251574282287578720, guid: ad4c334274ea6894fb3830ea1ae3f257, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251574282287578720, guid: ad4c334274ea6894fb3830ea1ae3f257, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5251574282287578724, guid: ad4c334274ea6894fb3830ea1ae3f257, type: 3}
       propertyPath: m_Pivot.x
