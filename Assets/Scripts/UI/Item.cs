@@ -8,6 +8,8 @@ public class Item : MonoBehaviour
     private StorageItemsSystem _itemStorage;
     private ItemSO _itemInfo;
     [SerializeField] private Image _itemImage;
+    [SerializeField] private Image _itemBackground;
+    [SerializeField] private Color _itemSelectedColor;
 
     public ItemSO GetCurrentItem()
     {
@@ -27,6 +29,7 @@ public class Item : MonoBehaviour
         if (_itemInfo)
         {
             _itemStorage.SetSelectedItem(_itemInfo);
+            _itemBackground.color = _itemSelectedColor;
         }
     }
 
@@ -35,5 +38,10 @@ public class Item : MonoBehaviour
         _itemInfo = null;
         _itemImage.sprite = null;
         _itemImage.gameObject.SetActive(false);
+    }
+
+    public void RestoreToNormalColor()
+    {
+        _itemBackground.color = Color.white;
     }
 }

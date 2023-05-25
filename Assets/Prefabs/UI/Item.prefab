@@ -53,6 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemImage: {fileID: 1925655212985462813}
+  _itemBackground: {fileID: 1925655212852549802}
+  _itemSelectedColor: {r: 0.9176471, g: 1, b: 0, a: 1}
 --- !u!114 &6387681468744053399
 MonoBehaviour:
   m_ObjectHideFlags: 0

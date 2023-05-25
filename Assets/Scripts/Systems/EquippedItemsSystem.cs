@@ -56,11 +56,21 @@ public class EquippedItemsSystem : StorageItemsSystem
 
     private void EquipItem(Item itemUI, ItemSO itemToEquip)
     {
-        if (itemUI.GetCurrentItem())
+        if(_selectedItem)
         {
-            EventManager.current.AddItemToInventory(itemUI.GetCurrentItem());
+            _storageUIItems[_selectedItem].RestoreToNormalColor();
         }
 
+        ItemSO currentItem = itemUI.GetCurrentItem();
+
+        if (currentItem)
+        {
+            _storageUIItems[currentItem].RestoreToNormalColor();
+            _storageUIItems.Remove(currentItem);
+            EventManager.current.AddItemToInventory(currentItem);
+        }
+
+        _storageUIItems.Add(itemToEquip, itemUI);
         itemUI.SetItem(itemToEquip, this);
     }
 
@@ -68,6 +78,8 @@ public class EquippedItemsSystem : StorageItemsSystem
     {
         if (_selectedItem)
         {
+            _storageUIItems[_selectedItem].RestoreToNormalColor();
+            _storageUIItems.Remove(_selectedItem);
             EventManager.current.UnequipItem(_selectedItem);
         }
     }

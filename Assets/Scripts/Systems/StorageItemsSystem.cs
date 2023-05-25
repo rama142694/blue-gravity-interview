@@ -32,12 +32,22 @@ public class StorageItemsSystem : MonoBehaviour
     public virtual void AddItem(ItemSO item)
     {
         CreateNewItemUI(item);
+
+        if (_selectedItem)
+        {
+            _storageUIItems[_selectedItem].RestoreToNormalColor();
+        }
         _selectedItem = null;
         _selectedItemInfo.gameObject.SetActive(false);
     }
 
     public virtual void RemoveItem(ItemSO item)
     {
+        if (_selectedItem)
+        {
+            _storageUIItems[_selectedItem].RestoreToNormalColor();
+        }
+
         Item itemUI = _storageUIItems[item];
         _storageUIItems.Remove(item);
         Destroy(itemUI.gameObject);
@@ -55,6 +65,11 @@ public class StorageItemsSystem : MonoBehaviour
 
     public void SetSelectedItem(ItemSO item)
     {
+        if(_selectedItem)
+        {
+            _storageUIItems[_selectedItem].RestoreToNormalColor();
+        }
+
         _selectedItem = item;
 
         if (_selectedItemInfo)
